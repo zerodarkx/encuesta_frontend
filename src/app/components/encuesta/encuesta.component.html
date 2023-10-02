@@ -1,0 +1,46 @@
+<a routerLink="/">
+    <img src="assets/volver.png" alt="volver" style="width: 25px; height: 25px;">
+</a>
+<div class="text-center">
+    <h1>Encuesta</h1>
+</div>
+<form class="text-center" [formGroup]="formEncuesta" (ngSubmit)="saveEncuesta()">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="estilo">Estilo Musical</label>
+        </div>
+        <div class="col-md-8">
+            <select class="form-select" formControlName="estilo">
+                <option value="">Seleccione</option>
+                <option value="rock">Rock</option>
+                <option value="pop">Pop</option>
+                <option value="clasica">Clásica</option>
+                <option value="salsa">Salsa</option>
+                <option value="otro">Otro</option>
+            </select>
+            <small class="text-muted letrasRojas"
+                *ngIf="validarCampo('estilo')">{{mensajeErrorDinamico('estilo')}}</small>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <label for="email">Correo</label>
+        </div>
+        <div class="col-md-8">
+            <input type="text" formControlName="email" class="form-control">
+            <small class="text-muted letrasRojas"
+                *ngIf="validarCampo('email')">{{mensajeErrorDinamico('email')}}</small>
+        </div>
+    </div>
+    <div class="alert alert-danger mt-4" role="alert" *ngIf="error">
+        {{error}}
+    </div>
+    <div class="alert alert-success mt-4" role="alert" *ngIf="exito">
+        {{exito}}
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-4">
+            <button class="btn btn-success w-100" [disabled]="formEncuesta.invalid" type="submit">Guardar</button>
+        </div>
+    </div>
+</form>
